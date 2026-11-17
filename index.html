@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Regex Playground · test JavaScript regular expressions</title>
+    <meta
+      name="description"
+      content="Write a JavaScript regular expression and see every match and group highlighted live, a plain-English explanation, a replace preview and a cheat sheet."
+    />
+    <meta name="theme-color" content="#f5f6f8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0e1117" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <a class="skip-link" href="#pattern">Skip to the pattern</a>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" id="brand-mark"></span>
+        <span class="brand-name">Regex Playground</span>
+      </div>
+      <div class="top-actions">
+        <label for="preset" class="sr-only">Load an example</label>
+        <select id="preset" class="select"></select>
+        <button type="button" class="btn" id="share"><span data-icon="link"></span><span class="btn-label">Share</span></button>
+        <button type="button" class="btn btn-icon" id="theme" aria-label="Switch to dark theme"></button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <h1 class="sr-only">Regex Playground</h1>
+      <div class="column">
+        <section class="card pattern-card" aria-labelledby="pattern-label">
+          <div class="card-head">
+            <label class="card-title" id="pattern-label" for="pattern">Regular expression</label>
+            <span class="engine-note">JavaScript (this browser's engine)</span>
+          </div>
+          <div class="pattern-row">
+            <span class="delim" aria-hidden="true">/</span>
+            <div class="pattern-field">
+              <div class="pattern-backdrop mono" id="pattern-backdrop" aria-hidden="true"></div>
+              <input
+                id="pattern"
+                class="pattern-input mono"
+                type="text"
+                spellcheck="false"
+                autocomplete="off"
+                autocapitalize="off"
+                placeholder="Type a pattern, for example \d+"
+                aria-describedby="pattern-error"
+              />
+            </div>
+            <span class="delim" aria-hidden="true">/</span>
+            <span class="flags-text mono" id="flags-text" aria-hidden="true"></span>
+          </div>
+          <div class="flags" role="group" aria-label="Flags" id="flags"></div>
+          <p class="error" id="pattern-error" role="alert" hidden></p>
+        </section>
+
+        <section class="card text-card" aria-labelledby="text-label">
+          <div class="card-head">
+            <label class="card-title" id="text-label" for="text">Test text</label>
+            <span class="status" id="status" aria-live="polite"></span>
+          </div>
+          <div class="editor">
+            <div class="editor-backdrop mono" id="highlights" aria-hidden="true"></div>
+            <textarea id="text" class="editor-input mono" spellcheck="false" autocomplete="off" autocapitalize="off" rows="9"></textarea>
+          </div>
+          <div class="legend" id="legend" aria-hidden="true"></div>
+        </section>
+
+        <section class="card replace-card" aria-labelledby="replace-label">
+          <div class="card-head">
+            <label class="card-title" id="replace-label" for="replacement">Replace with</label>
+            <span class="hint">Use <code>$1</code>, <code>$&lt;name&gt;</code>, <code>$&amp;</code></span>
+          </div>
+          <input id="replacement" class="text-input mono" type="text" spellcheck="false" autocomplete="off" placeholder="Replacement, for example $2-$1" />
+          <div class="output-head">
+            <span class="field-label" id="output-label">Result</span>
+            <button type="button" class="btn btn-sm btn-ghost" id="copy-output"><span data-icon="copy"></span><span>Copy</span></button>
+          </div>
+          <pre class="output mono" id="output" aria-labelledby="output-label" tabindex="0"></pre>
+        </section>
+      </div>
+
+      <section class="card side" aria-label="Results">
+        <div class="tabs" role="tablist" aria-label="Results views">
+          <button type="button" role="tab" class="tab" id="tab-matches" aria-controls="panel-matches" aria-selected="true">
+            Matches <span class="tab-count" id="match-count">0</span>
+          </button>
+          <button type="button" role="tab" class="tab" id="tab-explain" aria-controls="panel-explain" aria-selected="false" tabindex="-1">Explain</button>
+          <button type="button" role="tab" class="tab" id="tab-cheat" aria-controls="panel-cheat" aria-selected="false" tabindex="-1">Cheat sheet</button>
+        </div>
+        <div class="panel" role="tabpanel" id="panel-matches" aria-labelledby="tab-matches" tabindex="0">
+          <ol class="match-list" id="match-list"></ol>
+        </div>
+        <div class="panel" role="tabpanel" id="panel-explain" aria-labelledby="tab-explain" tabindex="0" hidden>
+          <ol class="explain-list" id="explain-list"></ol>
+        </div>
+        <div class="panel" role="tabpanel" id="panel-cheat" aria-labelledby="tab-cheat" tabindex="0" hidden>
+          <p class="panel-note">Click an item to insert it into the pattern.</p>
+          <div id="cheat"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Matching runs in a background worker and stops after 1.5 seconds, so a runaway pattern cannot freeze the page.</p>
+      <p>Press <kbd>/</kbd> to edit the pattern. Made by Strux.</p>
+    </footer>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
